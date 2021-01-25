@@ -37,7 +37,7 @@ def search(request):
     return render(request,"index.html",{'foods' : foods})
 
 
-@login_required
+#@login_required
 def detail(request, detail):
     food = get_object_or_404(Food, id=detail)
         
@@ -81,13 +81,13 @@ def add(request):
         return render(request,"add.html",{'form':form})
 
 
-@permission_required('domaci.delete_food')
+#@permission_required('domaci.delete_food')
 def delete(request, id):
 
     food = get_object_or_404(Food, id=id)
     if food is not None:
-        fs=FileSystemStorage()
-        fs.delete(food.img.name)
+        #fs=FileSystemStorage()
+        #fs.delete(food.img.name)
         food.delete()
 
 

@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'domaci.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'domaci',
+        'NAME': 'baza',
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost'

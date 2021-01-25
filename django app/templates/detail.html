@@ -10,25 +10,22 @@
 </head>
 <body>
 
-    {% if user.is_authenticated %}
+
     <div class="single_food_item media">
-        <img src="{{food.img.url}}" class="mr-3" alt="...">
+        <img src="{{food.slika}}" class="mr-3" alt="...">
         <div class="media-body align-self-center">
-            <h3>{{food.name}}</h3>
-            <p>{{food.desc}}</p>
-            <h5>${{food.price}}</h5>
-            {% if user.is_superuser %}
+            <h3>{{food.naziv}}</h3>
+            <p>{{food.komentar}}</p>
+            <h5>${{food.cena}}</h5>
+            <h5>Ocena: {{food.ocena}}</h5>
             <form action="/delete/{{food.id}}">
                 <button type="submit">Delete</button>
            </form>
-           {% endif %}
         </div>
 
         
     </div>
-    {% else %}
-    <h1 style="color:red">You must login first!</h1>
-    {% endif %}
+
 
     <a href="/">Nazad</a>
 </body>

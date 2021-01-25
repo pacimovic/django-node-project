@@ -140,11 +140,12 @@
 
                                     {% for food in foods %}
                                     <div class="single_food_item media">
-                                        <img src="{{food.img.url}}" class="mr-3" alt="...">
+                                        <img src="{{food.slika}}" class="mr-3" alt="...">
                                         <div class="media-body align-self-center">
-                                            <h3>{{food.name}}</h3>
-                                            <p>{{food.desc}}</p>
-                                            <h5>${{food.price}}</h5>
+                                            <h3>{{food.naziv}}</h3>
+                                            <p>{{food.komentar}}</p>
+                                            <h5>${{food.cena}}</h5>
+                                            <h4>Ocena: {{food.ocena}}</h4>
                                             <a href="{{food.id}}">Detalji</a>
                                         </div>
                                     </div>
