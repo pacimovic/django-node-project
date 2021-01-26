@@ -78,8 +78,7 @@ def register(request):
 
 
 def logout(request):
-    goto_url("http://localhost:8080")
-    #auth.logout(request)
-    #messages.info(request,'Logout successful')
-    #return redirect('/')
+    auth.logout(request)
+    messages.info(request,'Logout successful')
+    return redirect('/')
 

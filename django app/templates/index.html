@@ -118,8 +118,11 @@
                 <div class="col-lg-6">
                     <div class="nav nav-tabs food_menu_nav" id="myTab" role="tablist">
                         <a class="active" id="Special-tab" data-toggle="tab" href="#Special" role="tab"
-                            aria-controls="Special" aria-selected="false">Special <img src="{% static 'img/icon/play.svg' %}"
+                            aria-controls="Special" aria-selected="false">Menu <img src="{% static 'img/icon/play.svg' %}"
                                 alt="play"></a>
+                        <a id="Breakfast-tab" data-toggle="tab" href="#Breakfast" role="tab" aria-controls="Breakfast"
+                            aria-selected="false">Locations <img src="{% static 'img/icon/play.svg' %}"
+                            alt="play"></a>
 
                     </div>
                     
@@ -146,8 +149,31 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade single-member" id="Breakfast" role="tabpanel"
+                            aria-labelledby="Breakfast-tab">
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-6">
+                                    {% for location in locations %}
+                                    <div class="single_food_item media">
+                                        <img src="{{location.slika}}" class="mr-3" alt="...">
+                                        <div class="media-body align-self-center">
+                                            <h3>{{location.naziv}}</h3>
+                                            <br>
+                                            <h4>Adresa: </h4>
+                                            <p>{{location.adresa}}</p>
+                                            <br>
+                                            <h4>Telefon: </h4>
+                                            <p>{{location.telefon}}</p>
+                                        </div>
+                                    </div>  
+                                   {% endfor %}
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>

@@ -2,7 +2,7 @@ import os
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.conf import settings
-from .models import Food
+from .models import Food, Location
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from .forms import AddNewFood
@@ -13,9 +13,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 
 def index(request):
-
-    foods=Food.objects.all()
-    return render(request,"index.html",{'foods' : foods})
+    locations = Location.objects.all()
+    foods = Food.objects.all()
+    return render(request,"index.html",{'foods' : foods , 'locations' : locations})
 
 
 def search(request):
