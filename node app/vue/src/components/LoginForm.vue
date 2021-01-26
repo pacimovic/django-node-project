@@ -64,11 +64,17 @@ import bcrypt from 'bcryptjs';
                               if (same===true) {
                                   this.found=true;
                                   this.user=this.users[i];
-                                  this.user.is_active = true;
+                                  
                                   if(this.found){
-                                    const msg = JSON.stringify({is_active: this.user.is_active, orders:this.user.orders})
-                                    this.change_user({id: this.user.id, msg: msg});
-                                    router.push({path:'/home'});
+                                    if(this.user.is_superuser){
+                                        window.location.href = "http://localhost:8000"
+                                    }
+                                    else{
+                                        this.user.is_active = true;
+                                        const msg = JSON.stringify({is_active: this.user.is_active, orders:this.user.orders})
+                                        this.change_user({id: this.user.id, msg: msg});
+                                        router.push({path:'/home'});
+                                    }
                                   }
                               } 
                         })
@@ -97,7 +103,7 @@ import bcrypt from 'bcryptjs';
         // Reset our form values
         this.form.username = ''
         this.form.password = ''
-
+        window.location.href = "http://localhost:8000"
       }
     }
   }

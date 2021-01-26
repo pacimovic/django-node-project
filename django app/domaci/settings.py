@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'goto_url',
     'dingo.apps.DingoConfig',
     'django.contrib.admin',
     'django.contrib.auth',

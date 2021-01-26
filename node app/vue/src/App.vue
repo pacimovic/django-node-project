@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    
     <router-view/>
   </div>
 </template>
@@ -10,11 +11,12 @@ import { mapActions } from 'vuex';
 export default {
   name: 'App',
   methods: {
-      ...mapActions(['load_users','load_foods'])
+      ...mapActions(['load_users','load_foods','load_locations'])
   },
   mounted: function() {
       this.load_users();
       this.load_foods();
+      this.load_locations();
   }
 }
 </script>

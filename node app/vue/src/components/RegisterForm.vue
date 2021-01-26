@@ -53,7 +53,8 @@ export default {
           last: '',
           email: '',
           is_active:false,
-          orders:0
+          orders:0,
+          is_superuser:false
         }
       }
     },
@@ -109,7 +110,7 @@ export default {
                 let encPassword;
                 encPassword = this.encryptPassword(this.form.password);
 
-                const msg =JSON.stringify({username: this.form.username, password: encPassword, first_name: this.form.first, last_name: this.form.last, email: this.form.email, is_active: this.form.is_active, orders: this.form.orders});
+                const msg =JSON.stringify({username: this.form.username, password: encPassword, first_name: this.form.first, last_name: this.form.last, email: this.form.email, is_active: this.form.is_active, orders: this.form.orders, is_superuser: this.form.is_superuser});
                 this.new_user(msg);
                 router.push({path:'/'});
                 

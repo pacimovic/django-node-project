@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    
     <li v-for="food in foods" :key="food.id">
         <b-card no-body class="overflow-hidden" style="max-width: 540px;" footer-tag="footer">
             <b-row no-gutters>
@@ -24,7 +24,6 @@
                 <p class="mt-2">Ocena: {{ food.ocena }}</p>
             </template>
         </b-card>
-    
     </li>
   </div>
 </template>

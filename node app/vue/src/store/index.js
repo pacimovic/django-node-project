@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     users: [],
-    foods: []
+    foods: [],
+    locations: []
   },
 
 
@@ -17,6 +18,10 @@ export default new Vuex.Store({
 
     set_foods: function (state, foods) {
       state.foods = foods;
+    },
+
+    set_locations: function (state, locations) {
+      state.locations = locations;
     },
 
     add_user: function (state, user) {
@@ -72,6 +77,24 @@ export default new Vuex.Store({
       return response.json()
       }).then((jsonData) => {
         commit('set_foods', jsonData)
+      }).catch((error) => {
+      if (typeof error.text === 'function')
+        error.text().then((errorMessage) => {
+          alert(errorMessage);
+        });
+      else
+        alert(error);
+      });
+    },
+
+    load_locations: function ({ commit }) {
+      fetch('http://localhost/api/locations', { method: 'get' }).then((response) => {
+      if (!response.ok)
+        throw response;
+
+      return response.json()
+      }).then((jsonData) => {
+        commit('set_locations', jsonData)
       }).catch((error) => {
       if (typeof error.text === 'function')
         error.text().then((errorMessage) => {

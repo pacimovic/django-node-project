@@ -1,6 +1,6 @@
 <template>
     <div>
-    <b-jumbotron header="Kod Mikice" lead="Restoran za narucivanje hrane">
+    <b-jumbotron header="Dingo" lead="Restoran za narucivanje hrane">
         <p>Dobrodosao {{activeUser.first_name}}!</p>
         <p>Orders: {{activeUser.orders}}</p>
         <b-button v-on:click="logout" variant="primary">Logout</b-button>

@@ -23,7 +23,8 @@ const sema = Joi.object().keys({
     last_name: Joi.string().trim().max(100).required(),
     email: Joi.string().trim().email().max(50).required(),
     is_active: Joi.boolean(),
-    orders: Joi.number()
+    orders: Joi.number(),
+    is_superuser: Joi.boolean()
 });
 
 // Middleware da parsira json request-ove
@@ -50,8 +51,8 @@ route.post('/users', (req, res) => {
     else {  // Ako nisu upisemo ih u bazu
         // Izgradimo SQL query string
 
-        let query = "insert into user (username, password, first_name, last_name, email, is_active, orders) values (?, ?, ?, ?, ?, ?, ?)";
-        let formated = mysql.format(query, [req.body.username, req.body.password, req.body.first_name, req.body.last_name, req.body.email, req.body.is_active, req.body.orders]);
+        let query = "insert into user (username, password, first_name, last_name, email, is_active, orders, is_superuser) values (?, ?, ?, ?, ?, ?, ?, ?)";
+        let formated = mysql.format(query, [req.body.username, req.body.password, req.body.first_name, req.body.last_name, req.body.email, req.body.is_active, req.body.orders, req.body.is_superuser]);
         //let query = "insert into auth_user (username, password, email, first_name, last_name) values (?, ?, ?, ?, ?)";
         //let formated = mysql.format(query, [req.body.username, req.body.password, req.body.email, req.body.first_name, req.body.last_name]);
 
@@ -122,7 +123,7 @@ route.put('/food/:id', (req, res) => {
    // if (error)
   //      res.status(400).send(error.details[0].message);
    // else {
-        let query = "update food set ocena=? where id=?";
+        let query = "update dingo_food set ocena=? where id=?";
         //let formated = mysql.format(query, [req.body.username, req.body.password, req.body.first_name, req.body.last_name, req.body.email, req.body.is_active, req.body.orders, req.params.id]);
         let formated = mysql.format(query, [req.body.ocena, req.params.id]);
 
@@ -130,7 +131,7 @@ route.put('/food/:id', (req, res) => {
             if (err)
                 res.status(500).send(err.sqlMessage);
             else {
-                query = 'select * from food where id=?';
+                query = 'select * from dingo_food where id=?';
                 formated = mysql.format(query, [req.params.id]);
 
                 pool.query(formated, (err, rows) => {
@@ -148,7 +149,7 @@ route.put('/food/:id', (req, res) => {
 
 route.get('/foods', (req, res) => {
     // Saljemo upit bazi
-    pool.query('select * from food', (err, rows) => {
+    pool.query('select * from dingo_food', (err, rows) => {
         if (err)
             res.status(500).send(err.sqlMessage);  // Greska servera
         else
@@ -157,15 +158,8 @@ route.get('/foods', (req, res) => {
 });
 
 route.post('/foods', (req, res) => {
-    // Validiramo podatke koje smo dobili od korisnika
-    //let { error } = Joi.validate(req.body, sema);  // Object decomposition - dohvatamo samo gresku
 
-    // Ako su podaci neispravni prijavimo gresku
-   // if (error)
-     //   res.status(400).send(error.details[0].message);  // Greska zahteva
-   // else {  // Ako nisu upisemo ih u bazu
-        // Izgradimo SQL query string
-        let query = "insert into food (naziv, slika, komentar, cena, ocena) values (?, ?, ?, ?, ?)";
+        let query = "insert into dingo_food (naziv, slika, komentar, cena, ocena) values (?, ?, ?, ?, ?)";
         let formated = mysql.format(query, [req.body.naziv, req.body.slika, req.body.komentar, req.body.cena, req.body.ocena]);
 
         // Izvrsimo query
@@ -174,7 +168,7 @@ route.post('/foods', (req, res) => {
                 res.status(500).send(err.sqlMessage);
             else {
                 // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
-                query = 'select * from food where id=?';
+                query = 'select * dingo_food where id=?';
                 formated = mysql.format(query, [response.insertId]);
 
                 pool.query(formated, (err, rows) => {
@@ -188,5 +182,40 @@ route.post('/foods', (req, res) => {
     //}
 });
 
+
+route.get('/locations', (req, res) => {
+    // Saljemo upit bazi
+    pool.query('select * from dingo_location', (err, rows) => {
+        if (err)
+            res.status(500).send(err.sqlMessage);  // Greska servera
+        else
+            res.send(rows);
+    });
+});
+
+route.post('/locations', (req, res) => {
+
+    let query = "insert into dingo_location (naziv, slika, adresa, telefon) values (?, ?, ?, ?)";
+    let formated = mysql.format(query, [req.body.naziv, req.body.slika, req.body.adresa, req.body.telefon]);
+
+    // Izvrsimo query
+    pool.query(formated, (err, response) => {
+        if (err)
+            res.status(500).send(err.sqlMessage);
+        else {
+            // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
+            query = 'select * dingo_location where id=?';
+            formated = mysql.format(query, [response.insertId]);
+
+            pool.query(formated, (err, rows) => {
+                if (err)
+                    res.status(500).send(err.sqlMessage);
+                else
+                    res.send(rows[0]);
+            });
+        }
+    });
+//}
+});
 
 module.exports = route;

@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .forms import CreateNewUser, CheckUser
+from goto_url.utils import goto_url
 
 # Create your views here.
 
@@ -77,6 +78,8 @@ def register(request):
 
 
 def logout(request):
-    auth.logout(request)
-    messages.info(request,'Logout successful')
-    return redirect('/')
+    goto_url("http://localhost:8080")
+    #auth.logout(request)
+    #messages.info(request,'Logout successful')
+    #return redirect('/')
+
