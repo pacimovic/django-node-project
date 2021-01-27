@@ -52,26 +52,19 @@
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
                                 
-                               
                                 <li class="nav-item">
-                                    <a class="nav-link">Hello, {{user.username}}</a>
+                                    <a class="nav-link" href="add">Add food</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="accounts/logout">Logout</a>
-                                </li>
-                                
 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="addLocation">Add location</a>
+                                </li>
                                 
                                 <form action="search">
                                      <input type="text" placeholder="Search.." name="search">
                                      <button type="submit">Submit</button>
                                 </form>
                                 
-                                {% if user.is_superuser %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="add">Add food</a>
-                                </li>
-                                {% endif %}
 
                             </ul>
                         </div>
@@ -164,6 +157,9 @@
                                             <br>
                                             <h4>Telefon: </h4>
                                             <p>{{location.telefon}}</p>
+                                            <form action="/deleteLocation/{{location.id}}">
+                                                <button type="submit">Delete</button>
+                                           </form>
                                         </div>
                                     </div>  
                                    {% endfor %}
