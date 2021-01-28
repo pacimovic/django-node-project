@@ -96,7 +96,6 @@ import bcrypt from 'bcryptjs';
         // Reset our form values
         this.form.username = ''
         this.form.password = ''
-        window.location.href = "http://localhost:8000"
       }
     }
   }

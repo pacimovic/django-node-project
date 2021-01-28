@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+
     <Header  v-bind:activeUser="activeUser" v-bind:foods="foods"/>
     <b-container>
       <b-row>
@@ -14,7 +15,8 @@
           </b-col>
       </b-row>
     </b-container>
-    
+
+
   </div>
 </template>
 
